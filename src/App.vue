@@ -1,17 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <el-config-provider :locale="locale">
+    <img alt="Vue logo" src="./assets/logo.png" />
+  </el-config-provider>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { ElConfigProvider } from "element-plus";
+
+import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    ElConfigProvider,
+  },
+  data() {
+    return {
+      locale: zhCn,
+    };
+  },
+};
 </script>
 
 <style>
