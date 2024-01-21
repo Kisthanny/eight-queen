@@ -50,12 +50,7 @@ export default {
     this.init();
   },
 
-  mounted() {
-    this.setSafeBoardWidth({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-  },
+  mounted() {},
 
   methods: {
     setSafeBoardWidth({ width, height }) {

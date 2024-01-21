@@ -2,9 +2,15 @@ const directiveMap = {
   resize: {
     mounted(el, binding) {
       const callback = binding.value;
+      const modifiers = binding.modifiers;
+
       window.addEventListener("resize", () =>
         callback({ width: window.innerWidth, height: window.innerHeight })
       );
+
+      if (!modifiers || !modifiers.quiet) {
+        callback({ width: window.innerWidth, height: window.innerHeight });
+      }
       el._onResize = callback;
     },
     unmounted(el) {
