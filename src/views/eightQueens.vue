@@ -58,6 +58,13 @@ export default {
       this.boardWidth = Math.min(width, safeHeight);
     },
     handleCellClick(cell) {
+      this.$myNotify({
+        message: `${cell.colId}${cell.rowId}`,
+        onConfirm: () => {
+          console.log("on confirm");
+        },
+        cancel: false,
+      });
       if (cell.content) {
         cell.content = "";
       } else if (!this.isValid) {
