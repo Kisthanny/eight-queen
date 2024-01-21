@@ -1,7 +1,9 @@
 <template>
-  <el-config-provider :locale="locale">
-    <router-view />
-  </el-config-provider>
+  <div class="outer-case" v-resize="setInnerScale">
+    <el-config-provider :locale="locale">
+      <router-view />
+    </el-config-provider>
+  </div>
 </template>
 
 <script>
@@ -19,6 +21,11 @@ export default {
       locale: zhCn,
     };
   },
+  methods: {
+    setInnerScale({ width, height }) {
+      this.$store.commit("global/setInnerScale", { width, height });
+    },
+  },
 };
 </script>
 
@@ -29,6 +36,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.outer-case {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
