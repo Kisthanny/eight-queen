@@ -87,6 +87,8 @@ export default {
 <style lang="scss" scoped>
 .chess-board {
   width: 100%;
+  height: 100%;
+  overflow: hidden;
   box-shadow: 2px 2px 6px #b2b2b2;
   .row {
     display: flex;
