@@ -1,5 +1,5 @@
 <template>
-  <div class="eight-queen">
+  <div class="eight-queen" v-resize="setSafeBoardWidth">
     <div class="chess-board" ref="chessBoardRef">
       <div
         class="row"
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <MyButton style="marginTop: 16px" text="clear" @click="init" />
+    <div class="footer"><MyButton text="clear" @click="init" /></div>
   </div>
 </template>
 
@@ -51,10 +51,17 @@ export default {
   },
 
   mounted() {
-    this.boardWidth = this.$refs.chessBoardRef.getBoundingClientRect().width;
+    this.setSafeBoardWidth({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
   },
 
   methods: {
+    setSafeBoardWidth({ width, height }) {
+      const safeHeight = height - 74;
+      this.boardWidth = Math.min(width, safeHeight);
+    },
     handleCellClick(cell) {
       if (cell.content) {
         cell.content = "";
@@ -69,8 +76,8 @@ export default {
       try {
         const status = validateQueensStatus(this.chessBoardList);
         this.isValid = true;
-        if(status==="success"){
-            this.$message.success("Congratulations")
+        if (status === "success") {
+          this.$message.success("Congratulations");
         }
       } catch (error) {
         this.$message.error(error.message);
@@ -103,5 +110,11 @@ export default {
       }
     }
   }
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 </style>
