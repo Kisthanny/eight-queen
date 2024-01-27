@@ -92,7 +92,8 @@ export default {
     },
     async fetchUserInfo() {
       try {
-      const response = await this.$post("/jimmy", {});
+      const response = await this.$post("qryAppList", {});
+      await this.$post("qryUserInfo", {});
       console.log(response);
       } catch (error) {
         this.$myNotify(error.message)

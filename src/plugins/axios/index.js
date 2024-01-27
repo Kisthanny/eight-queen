@@ -2,11 +2,11 @@ import axios from "axios";
 
 const instance = axios.create();
 
-const prefix = "/apphub/api";
-
 instance.interceptors.request.use(function (config) {
-  config.url = prefix + config.url;
-  return config
+  const rawUrl = config.url;
+  const connector = rawUrl[0] === "/" ? "" : "/";
+  config.url = `${process.env.VUE_APP_REQUEST_PREFIX}${connector}${rawUrl}`;
+  return config;
 });
 
 export default {

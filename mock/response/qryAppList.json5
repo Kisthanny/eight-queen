@@ -1,0 +1,10 @@
+{
+  data: [
+    {
+      appId: "@id",
+      appName: "8ueens",
+      icon: "@image('200x200', 'black', '#fff', '8ueens')",
+      linkURL: "/eightQueens",
+    },
+  ],
+}
