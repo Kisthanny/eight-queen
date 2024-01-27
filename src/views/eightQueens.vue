@@ -54,8 +54,8 @@ export default {
 
   methods: {
     setSafeBoardWidth({ width, height }) {
-      const safeHeight = height - 74;
-      this.boardWidth = Math.min(width, safeHeight);
+      const safeHeight = height - 74 - 32;
+      this.boardWidth = Math.min(width - 32, safeHeight);
     },
     handleCellClick(cell) {
       this.$myNotify({
@@ -88,35 +88,47 @@ export default {
     },
     init() {
       this.chessBoardList = initChessBoardList();
+      this.fetchUserInfo();
+    },
+    async fetchUserInfo() {
+      try {
+      const response = await this.$post("/jimmy", {});
+      console.log(response);
+      } catch (error) {
+        this.$myNotify(error.message)
+      }
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.chess-board {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  box-shadow: 2px 2px 6px #b2b2b2;
-  .row {
-    display: flex;
-    .cell {
-      &.dark {
-        background: black;
-        color: white;
-      }
-      &.white {
-        background: white;
-        color: black;
+.eight-queen {
+  padding: 16px;
+  .chess-board {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-shadow: 2px 2px 6px #b2b2b2;
+    .row {
+      display: flex;
+      .cell {
+        &.dark {
+          background: black;
+          color: white;
+        }
+        &.white {
+          background: white;
+          color: black;
+        }
       }
     }
   }
-}
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  .footer {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
 }
 </style>
