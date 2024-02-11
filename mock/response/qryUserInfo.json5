@@ -1,0 +1,8 @@
+{
+  userId: "@id",
+  userName: "@cname",
+  avatar: "@image('200x200', 'black', '#fff', 'admin')",
+  email: "@email",
+  mobile: "18565367317",
+  description: "@paragraph",
+}

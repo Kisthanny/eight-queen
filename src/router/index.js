@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
-  { path: "/", redirect: "/eightQueens" },
+  { path: "/", component: () => import("@/views/workBench.vue") },
   { path: "/eightQueens", component: () => import("@/views/eightQueens.vue") },
 ];
 

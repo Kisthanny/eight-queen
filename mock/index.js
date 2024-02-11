@@ -20,24 +20,25 @@ function mockFileExist(fileName) {
   );
 }
 
+function randomWait() {
+  return Math.random() * 1000 + 1000;
+}
+
 function bindMockRequest(app, method, name) {
-  const requestURL = `${process.env.VUE_APP_REQUEST_PREFIX}/${name}`
-  app[method](
-    requestURL,
-    function (req, res) {
-      if (mockFileExist(name)) {
-        const json = getJsonFile(`./${name}.json5`);
-        console.log("MOCK REQUEST: ", requestURL);
-        setTimeout(() => {
-          res.json(Mock.mock(json));
-        }, 1000);
-      }else{
-        res.json({
-          "errorMessage": "No Mock Response"
-        })
-      }
+  const requestURL = `${process.env.VUE_APP_REQUEST_PREFIX}/${name}`;
+  app[method](requestURL, function (req, res) {
+    if (mockFileExist(name)) {
+      const json = getJsonFile(`./${name}.json5`);
+      console.log("MOCK REQUEST: ", requestURL);
+      setTimeout(() => {
+        res.json(Mock.mock(json));
+      }, randomWait());
+    } else {
+      res.json({
+        errorMessage: "No Mock Response",
+      });
     }
-  );
+  });
 }
 
 module.exports = function (app) {
