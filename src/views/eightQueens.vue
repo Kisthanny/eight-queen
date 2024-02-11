@@ -58,13 +58,7 @@ export default {
       this.boardWidth = Math.min(width - 32, safeHeight);
     },
     handleCellClick(cell) {
-      this.$myNotify({
-        message: `${cell.colId}${cell.rowId}`,
-        onConfirm: () => {
-          console.log("on confirm");
-        },
-        cancel: false,
-      });
+      this.$message(`${cell.colId}${cell.rowId}`);
       if (cell.content) {
         cell.content = "";
       } else if (!this.isValid) {
@@ -82,7 +76,7 @@ export default {
           this.$message.success("Congratulations");
         }
       } catch (error) {
-        this.$message.error(error.message);
+        this.$myNotify(error.message);
         this.isValid = false;
       }
     },
